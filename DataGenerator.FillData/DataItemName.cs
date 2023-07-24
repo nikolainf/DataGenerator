@@ -1,4 +1,4 @@
-﻿namespace DataGenerator.FillData;
+﻿namespace DataGenerator.DataStore;
 public enum DataItemName
 {
     MaleFirstNames,

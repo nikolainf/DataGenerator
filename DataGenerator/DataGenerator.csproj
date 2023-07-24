@@ -12,7 +12,16 @@
 
   <ItemGroup>
     <Folder Include="DataGeneration\MetaDataGeneration\" />
-    <Folder Include="DataStore\PersonData\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataGenerator.FillData\DataGenerator.DataStore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="DataStore\PersonData\MaleLastNames.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json;
-using System.Linq;
+﻿
+using Newtonsoft.Json;
 
-namespace DataGenerator.FillData;
-public class FirstNamesJsonFileContext
+namespace DataGenerator.DataStore;
+public class DataItemJsonFileContext
 {
     private readonly string _fileName;
 
-    public FirstNamesJsonFileContext(DataItemName dataItem) =>
-        _fileName = Path.Combine(Utils.GetSolutionDirectory(), @$"DataGenerator\DataStore\PersonData\{dataItem}.json");
+    public DataItemJsonFileContext(DataItemName dataItem) =>
+        _fileName = Utils.GetFileNameFromPersonData(dataItem);
 
     public async Task<bool> AddNew(string[] data)
     {
@@ -16,7 +16,7 @@ public class FirstNamesJsonFileContext
             throw new ArgumentNullException(nameof(data));
         }
 
-        var existingData = await GetExistingData();
+        var existingData = await GetData();
        
         if(existingData != null)
         {
@@ -29,21 +29,7 @@ public class FirstNamesJsonFileContext
             await SaveData(data);
         }
 
-        async Task<string[]?> GetExistingData()
-        {
-            bool isFileExist = File.Exists(_fileName);
-            if (isFileExist)
-            {
-                var dataJson = await File.ReadAllTextAsync(_fileName);
-                var dataFromFile = JsonConvert.DeserializeObject<string[]>(dataJson);
-
-                return dataFromFile;
-            }
-            else
-            {
-                return null;
-            }
-        }
+      
 
         async Task SaveData(IEnumerable<string> dataToSave)
         {
@@ -59,5 +45,21 @@ public class FirstNamesJsonFileContext
 
         }
         return true;
+    }
+
+    public async Task<string[]?> GetData()
+    {
+        bool isFileExist = File.Exists(_fileName);
+        if (isFileExist)
+        {
+            var dataJson = await File.ReadAllTextAsync(_fileName);
+            var dataFromFile = JsonConvert.DeserializeObject<string[]>(dataJson);
+
+            return dataFromFile;
+        }
+        else
+        {
+            return null;
+        }
     }
 }

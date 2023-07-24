@@ -1,9 +1,7 @@
-﻿namespace DataGenerator.FillData;
-internal static class Utils
+﻿namespace DataGenerator.DataStore;
+public static class Utils
 {
-   
-
-    internal static string GetSolutionDirectory()
+    public static string GetSolutionDirectory()
     {
         DirectoryInfo currentDirectory = new(Directory.GetCurrentDirectory());
         while (!currentDirectory.GetFiles("*.sln").Any())
@@ -12,5 +10,10 @@ internal static class Utils
         }
 
         return currentDirectory.FullName;
+    }
+
+    public static string GetFileNameFromPersonData(DataItemName dataItemName)
+    {
+        return Path.Combine(GetSolutionDirectory(), @$"DataGenerator\DataStore\PersonData\{dataItemName}.json");
     }
 }

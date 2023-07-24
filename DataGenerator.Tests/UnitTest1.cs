@@ -14,10 +14,19 @@ public class RequestParserTests
 
         result.Properties.Should().BeEquivalentTo(new[]
         {
-            new RequestProperty("firstname", RequestPropertyType.String),
-            new RequestProperty("lastname", RequestPropertyType.String),
+            new RequestProperty("firstname", RequestPropertyType.FirstName),
+            new RequestProperty("lastname", RequestPropertyType.LastName),
             new RequestProperty("birthdate", RequestPropertyType.String)
         });
+
+    }
+
+    [Fact]
+    public void Simple_Parse_ItemsCountDefault()
+    {
+        RequestParser parser = new("firstname lastname birthdate");
+
+        var result = parser.Parse();
 
         result.ItemsCount.Should().Be(100);
     }
@@ -29,13 +38,6 @@ public class RequestParserTests
 
         var result = parser.Parse();
 
-        result.Properties.Should().BeEquivalentTo(new[]
-        {
-            new RequestProperty("firstname", RequestPropertyType.String),
-            new RequestProperty("lastname", RequestPropertyType.String),
-            new RequestProperty("birthdate", RequestPropertyType.String)
-        });
-
         result.ItemsCount.Should().Be(250);
     }
 
@@ -45,13 +47,6 @@ public class RequestParserTests
         RequestParser parser = new("300 firstname lastname birthdate");
 
         var result = parser.Parse();
-
-        result.Properties.Should().BeEquivalentTo(new[]
-        {
-            new RequestProperty("firstname", RequestPropertyType.String),
-            new RequestProperty("lastname", RequestPropertyType.String),
-            new RequestProperty("birthdate", RequestPropertyType.String)
-        });
 
         result.ItemsCount.Should().Be(300);
     }

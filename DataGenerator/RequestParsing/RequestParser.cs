@@ -2,6 +2,12 @@
 public class RequestParser
 {
 	private readonly string _input;
+	private readonly IDictionary<string, RequestPropertyType> _wordTypes = new Dictionary<string, RequestPropertyType>()
+	{
+        { "FIRSTNAME", RequestPropertyType.FirstName },
+		{ "LASTNAME", RequestPropertyType.LastName }
+    };
+		
 
 	public RequestParser(string input) =>
 		_input = input;
@@ -45,7 +51,7 @@ public class RequestParser
 	
 		foreach(var wordUnit in units)
 		{
-			propList.Add(new RequestProperty(wordUnit, RequestPropertyType.String));
+			propList.Add(new RequestProperty(wordUnit, DefinePropertyType(wordUnit)));
 		}
 
 		ParsingResult result = new();
@@ -53,5 +59,18 @@ public class RequestParser
 		result.ItemsCount = itemsCount;
 
 		return result;
+	}
+
+	private RequestPropertyType DefinePropertyType(string word)
+	{
+		if(_wordTypes.TryGetValue(word.ToUpper(), out var pType))
+		{
+			return pType;
+		}
+		else
+		{
+			return RequestPropertyType.String;
+		}
+
 	}
 }

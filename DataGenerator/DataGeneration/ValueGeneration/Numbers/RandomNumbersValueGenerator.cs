@@ -1,4 +1,4 @@
-﻿namespace DataGenerator.DataGeneration.ValueGeneration;
+﻿namespace DataGenerator.DataGeneration.ValueGeneration.Numbers;
 public class RandomNumbersValueGenerator
 {
     const string chars = "0123456789";

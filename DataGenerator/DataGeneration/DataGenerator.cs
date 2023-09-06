@@ -1,4 +1,6 @@
 ﻿using DataGenerator.DataGeneration.ValueGeneration;
+using DataGenerator.DataGeneration.ValueGeneration.Numbers;
+using DataGenerator.DataGeneration.ValueGeneration.Numers;
 using DataGenerator.RequestParsing;
 
 namespace DataGenerator.DataGeneration;
@@ -45,6 +47,11 @@ public class DataGenerator
         else if(property.Type == RequestPropertyType.FirstName) 
         {
             FirstNameValueGenerator generator = new();
+            return await generator.Generate(itemsCount);
+        }
+        else if(property.Type == RequestPropertyType.LastHundredYears)
+        {
+            ModernBirthYearGenerator generator = new();
             return await generator.Generate(itemsCount);
         }
         else if(property.Type == RequestPropertyType.LastName) 

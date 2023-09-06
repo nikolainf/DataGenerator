@@ -5,7 +5,10 @@ public class RequestParser
 	private readonly IDictionary<string, RequestPropertyType> _wordTypes = new Dictionary<string, RequestPropertyType>()
 	{
         { "FIRSTNAME", RequestPropertyType.FirstName },
-		{ "LASTNAME", RequestPropertyType.LastName }
+		{ "LASTNAME", RequestPropertyType.LastName },
+		{ "YEAR", RequestPropertyType.LastHundredYears },
+		{ "POSTCODE", RequestPropertyType.PostCode },
+		{ "ZIPCODE", RequestPropertyType.PostCode }
     };
 		
 

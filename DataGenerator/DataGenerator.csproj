@@ -19,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="DataStore\PersonData\FemaleFirstNames.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="DataStore\PersonData\MaleLastNames.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
